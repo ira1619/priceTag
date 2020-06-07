@@ -1,0 +1,36 @@
+type User {
+    id: ID @id
+    coreId: String @unique
+    firstName: String
+    lastName: String
+    username: String
+}
+
+type ItemCategory {
+    id: ID @id
+    coreId: String @unique
+    categoryName: String
+    items: [Item!]!
+    createdBy: User @relation(name: "CreatedCategoryRelation")
+    _createdAt: DateTime
+    modifiedBy: User @relation(name: "ModifiedCategoryRelation")
+    modifiedAt: DateTime
+    removed: Boolean
+}
+
+type Item {
+    id: ID @id
+    coreId: String @unique
+    name: String
+    price: Float
+    discount: Int
+    category: ItemCategory
+    isDisplayed: Boolean
+    createdBy: User @relation(name: "CreatedItemRelation")
+    _createdAt: DateTime
+    modifiedBy: User @relation(name: "ModifiedItemRelation")
+    modifiedAt: DateTime
+    removed: Boolean
+}
+
+scalar DateTime
